@@ -1,0 +1,17 @@
+{
+	"111": {
+		"password": "111",
+		"name": "111",
+		"hasItem": [
+			"aaa",
+			"ccc"
+		],
+		"money": 1500
+	},
+	"first_user": {
+		"password": "ddd",
+		"name": "side",
+		"hasItem": [],
+		"money": 2000
+	}
+}
