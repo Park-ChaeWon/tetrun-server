@@ -303,23 +303,25 @@ module.exports = function(app, fs){
         })
     })
 
-    // app.get('/result/:money/:username', function(req, res){
-    //     var result = {};
-    //     fs.readFile(__dirname + "/../data/user.json", "utf8", function(err, data){
-    //         var users = JSON.parse(data);
-    //         if(!users[req.params.username]){
-    //             result["success"] = 0;
-    //             result["error"] = "not found"
-    //             res.json(result);
-    //             return;
-    //         }
-    //         users[username].money += money;
-    //         fs.write(__dirname + "/../data/user.json", 
-    //             JSON.srtringify(users, null, '\t'), "utf8", function(err, data){
-    //             result["success"] = 1;
-    //             res.json(result);
-    //             return;
-    //         })
-    //     })
-    // })
+    app.get('/result/:money/:username', function(req, res){
+        var result = {};
+        var username = req.params.username;
+        var money = req.params.money;
+        fs.readFile(__dirname + "/../data/user.json", "utf8", function(err, data){
+            var users = JSON.parse(data);
+            if(!users[username]){
+                result["success"] = 0;
+                result["error"] = "not found"
+                res.json(result);
+                return;
+            }
+            users[username].money += Number(money);
+            fs.writeFile(__dirname + "/../data/user.json", 
+                JSON.stringify(users, null, '\t'), "utf8", function(err, data){
+                result["success"] = 1;
+                res.json(result);
+                return;
+            })
+        })
+    })
 }
